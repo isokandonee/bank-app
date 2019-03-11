@@ -1,11 +1,14 @@
-<?php require "connect.php"; 
-$fetch = mysqli_query($conn,"SELECT name from user_registration");
+<?php 
+session_start();
+$id = $_SESSION['unames'];
+require "connect.php"; 
+$fetch = mysqli_query($conn,"SELECT name from user_registration where username = '$id'");
 ?>
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<link rel="icon" type="image/png" href="assets/img/obs.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Bank App</title>
@@ -130,36 +133,35 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Name</label>
-                                                <input type="text" class="form-control" name="name" disabled>
+                                                <label>Name</label></textarea>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Remarks</label>
-                                                <textarea type="text" class="form-control" name="remark" placeholder="Remarks"></textarea>
+                                                <label>Amount</label>
+                                                <input type="text" class="form-control" name="amount" placeholder="Amount">
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Password</label>
                                                 <input type="password" class="form-control" name="pass" placeholder="Password">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     
                             </div>
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right">Create</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right">Send</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>

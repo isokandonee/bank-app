@@ -1,11 +1,13 @@
-<?php require "connect.php"; 
+<?php 
+session_start();
+require "connect.php"; 
 $fetch = mysqli_query($conn,"SELECT name from user_registration");
 ?>
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<link rel="icon" type="image/png" href="assets/img/obs.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Light Bootstrap Dashboard by Creative Tim</title>

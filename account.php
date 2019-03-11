@@ -1,11 +1,13 @@
-<?php require "connect.php"; 
+<?php 
+session_start();
+require "connect.php"; 
 $fetch = mysqli_query($conn,"SELECT name from user_registration");
 ?>
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<link rel="icon" type="image/png" href="assets/img/obs.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Light Bootstrap Dashboard by Creative Tim</title>
@@ -122,13 +124,13 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
                             <div class="content">
                                     <form enctype="multipart/form-data" action="accountc.php" method="POST">
                                         <div class="row">
-                                            <div class="col-md-3 px-1">
+                                            <!-- <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>Username</label>
                                                     <input type="text" class="form-control" placeholder="Username" name="username">
                                                 </div>
-                                            </div>
-                                            <div class="col-md-4 pl-1">
+                                            </div> -->
+                                            <div class="col-md-8 pl-1">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Amount to deposit</label>
                                                     <input type="text" class="form-control" name="amount" placeholder="Amount">

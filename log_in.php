@@ -1,4 +1,6 @@
-<?php include 'layout.php'; ?>
+<?php 
+include 'layout.php'; 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,8 +46,8 @@
         ?>
         <form class="col-md-6 mx-auto shadow pt-4 pd-4" action="login.php" method="POST">
             <div class="form-group">
-                <label for="usr">Username:</label>
-                <input type="text" required  class="form-control" id="usr" name="username">
+                <label for="usr">Email:</label>
+                <input type="text" required  class="form-control" id="usr" name="email">
             </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
