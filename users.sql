@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2019 at 05:16 PM
+-- Generation Time: Mar 12, 2019 at 11:05 AM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -28,10 +28,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `account_type` (
   `id` int(20) NOT NULL,
-  `account_type` varchar(20) NOT NULL,
-  `created_at` varchar(20) NOT NULL,
-  `updated_at` varchar(20) NOT NULL
+  `account_type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `account_type`
+--
+
+INSERT INTO `account_type` (`id`, `account_type`) VALUES
+(1, 'current'),
+(2, 'savings'),
+(3, 'domiciliary');
 
 -- --------------------------------------------------------
 
@@ -41,8 +48,19 @@ CREATE TABLE `account_type` (
 
 CREATE TABLE `status` (
   `id` int(20) NOT NULL,
-  `status` int(20) NOT NULL
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`id`, `status`) VALUES
+(1, 'okay'),
+(2, 'blocked'),
+(3, 'pending'),
+(4, 'frozen'),
+(5, 'efcc list');
 
 -- --------------------------------------------------------
 
@@ -67,8 +85,16 @@ CREATE TABLE `transaction` (
 
 CREATE TABLE `transaction_type` (
   `id` int(20) NOT NULL,
-  `transactio_type` int(20) NOT NULL
+  `transactio_type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaction_type`
+--
+
+INSERT INTO `transaction_type` (`id`, `transactio_type`) VALUES
+(1, 'debit'),
+(2, 'credit');
 
 -- --------------------------------------------------------
 
@@ -80,7 +106,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
   `passport` varchar(20) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -153,12 +179,12 @@ ALTER TABLE `user_account`
 -- AUTO_INCREMENT for table `account_type`
 --
 ALTER TABLE `account_type`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
@@ -168,7 +194,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `transaction_type`
 --
 ALTER TABLE `transaction_type`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
