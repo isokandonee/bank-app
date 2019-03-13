@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2019 at 11:05 AM
+-- Generation Time: Mar 13, 2019 at 09:47 AM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -139,37 +139,50 @@ CREATE TABLE `user_account` (
 -- Indexes for table `account_type`
 --
 ALTER TABLE `account_type`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `status`
 --
 ALTER TABLE `status`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `transaction`
 --
 ALTER TABLE `transaction`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`),
+  ADD KEY `transaction_type_id` (`transaction_type_id`),
+  ADD KEY `source_id` (`source_id`),
+  ADD KEY `destination_id` (`destination_id`);
 
 --
 -- Indexes for table `transaction_type`
 --
 ALTER TABLE `transaction_type`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `user_account`
 --
 ALTER TABLE `user_account`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`),
+  ADD KEY `id_2` (`id`),
+  ADD KEY `account_type_id` (`account_type_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `status_id` (`status_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -200,6 +213,26 @@ ALTER TABLE `transaction_type`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`transaction_type_id`) REFERENCES `transaction_type` (`id`),
+  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`source_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`destination_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `user_account`
+--
+ALTER TABLE `user_account`
+  ADD CONSTRAINT `user_account_ibfk_1` FOREIGN KEY (`account_type_id`) REFERENCES `account_type` (`id`),
+  ADD CONSTRAINT `user_account_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_account_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
