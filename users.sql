@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2019 at 09:47 AM
+-- Generation Time: Mar 13, 2019 at 12:22 PM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -99,24 +99,6 @@ INSERT INTO `transaction_type` (`id`, `transactio_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `first_name` varchar(20) NOT NULL,
-  `last_name` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `passport` varchar(20) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `created_at` varchar(20) NOT NULL,
-  `updated_at` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user_account`
 --
 
@@ -130,6 +112,31 @@ CREATE TABLE `user_account` (
   `created_at` varchar(20) NOT NULL,
   `updated_at` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_tb`
+--
+
+CREATE TABLE `user_tb` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(20) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `passport` varchar(20) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `created_at` varchar(50) NOT NULL,
+  `updated_at` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_tb`
+--
+
+INSERT INTO `user_tb` (`id`, `first_name`, `last_name`, `email`, `password`, `passport`, `phone`, `created_at`, `updated_at`) VALUES
+(1, 'Ogunniyi', 'Isokan', 'isokandone@gmail.com', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 'upload/IMG_0034.JPG', '9084921182', '13 March 2019 12:06:33', '13 March 2019 12:06:33');
 
 --
 -- Indexes for dumped tables
@@ -167,22 +174,24 @@ ALTER TABLE `transaction_type`
   ADD KEY `id` (`id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
-
---
 -- Indexes for table `user_account`
 --
 ALTER TABLE `user_account`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `account_number` (`account_number`),
   ADD KEY `id` (`id`),
   ADD KEY `id_2` (`id`),
   ADD KEY `account_type_id` (`account_type_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `status_id` (`status_id`);
+
+--
+-- Indexes for table `user_tb`
+--
+ALTER TABLE `user_tb`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -209,10 +218,10 @@ ALTER TABLE `transaction`
 ALTER TABLE `transaction_type`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `user_tb`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user_tb`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
@@ -222,15 +231,15 @@ ALTER TABLE `users`
 --
 ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`transaction_type_id`) REFERENCES `transaction_type` (`id`),
-  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`source_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`destination_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`source_id`) REFERENCES `user_tb` (`id`),
+  ADD CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`destination_id`) REFERENCES `user_tb` (`id`);
 
 --
 -- Constraints for table `user_account`
 --
 ALTER TABLE `user_account`
   ADD CONSTRAINT `user_account_ibfk_1` FOREIGN KEY (`account_type_id`) REFERENCES `account_type` (`id`),
-  ADD CONSTRAINT `user_account_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_account_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`id`),
   ADD CONSTRAINT `user_account_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
