@@ -1,16 +1,19 @@
 <?php 
 session_start();
 require "connect.php"; 
-$us = $_SESSION['unames'];
-$fetch = mysqli_query($conn,"SELECT username,id from user_registration where username = '$us'");
-$id = $_SESSION['id'];
-$fetcha = mysqli_query($conn,"SELECT account_no from user_account where id = '$id'");
-$a = mysqli_fetch_array($fetcha);
-$acc = $a['account_no'];
-$fetcht = mysqli_query($conn,"SELECT credit,debit from user_transaction where account_no = '$acc'");
-$t = mysqli_fetch_array($fetcht);
+$em = $_SESSION['email'];
+$fetch = mysqli_query($conn,"SELECT first_name,balance,account_number from user_tb left OUTER join user_account ON (user_tb.id = user_account.user_id)");
+// $id = $_SESSION['id'];
+// $fetcha = mysqli_query($conn,"SELECT account_no from user_account where id = '$id'");
+// $a = mysqli_fetch_array($fetcha);
+// $acc = $a['account_no'];
+// $fetcht = mysqli_query($conn,"SELECT credit,debit from transaction where account_no = '$acc'");
+$r = mysqli_fetch_array($fetch);
 // $t['credit'];
 // $ac = ;
+
+// $fetcht = mysqli_query($conn,"SELECT name,author,title FROM customers JOIN classics ON customers.isbn=classics.isbn;");
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -90,7 +93,7 @@ $t = mysqli_fetch_array($fetcht);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><table><?php while($r = mysqli_fetch_array($fetch)){ echo "<tr> <td>".$r['username']."</td></tr>";} ?></table></a>
+                    <a class="navbar-brand" href="#"><?php echo "<tr> <td>".$r['first_name']."</td></tr>"; ?></a>
                 </div>
         <div class="collapse navbar-collapse">
             
@@ -158,12 +161,13 @@ $t = mysqli_fetch_array($fetcht);
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Account Balance for <p class="simple-text text-success" style="font-size:1em;"> <?php while($a = mysqli_fetch_array($fetcha)){ echo "<tr> <td>".$a['account_no']."</td></tr>";} ?></p></h4>
+                                <h4 class="title">Account Balance</h4>
                                 <!-- <i class="divider"></i> -->
+                                <p class="simple-text text-success" style="font-size:1em;"> <?php echo "<tr> <td>".$r['account_number']."</td></tr>"; ?></p>
                             </div><hr>
                             <div class="content">
                                 <div class="simple-text text-success">
-                                    <b style="font-size:3.5em;">#<?php $cr = $t['credit']; $de = $t['debit']; $cd = $cr-$de; echo "<tr> <td>".$cd."</td></tr>"; ?></b>
+                                    <b style="font-size:3.5em;">#<?php echo "<tr> <td>".$r['balance']."</td></tr>"; ?></b>
                                 </div>
                             </div>
                         </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2019 at 12:22 PM
+-- Generation Time: Mar 13, 2019 at 01:26 PM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -109,8 +109,8 @@ CREATE TABLE `user_account` (
   `account_number` int(20) NOT NULL,
   `balance` int(20) NOT NULL,
   `status_id` int(20) NOT NULL,
-  `created_at` varchar(20) NOT NULL,
-  `updated_at` varchar(20) NOT NULL
+  `created_at` varchar(50) NOT NULL,
+  `updated_at` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -136,7 +136,7 @@ CREATE TABLE `user_tb` (
 --
 
 INSERT INTO `user_tb` (`id`, `first_name`, `last_name`, `email`, `password`, `passport`, `phone`, `created_at`, `updated_at`) VALUES
-(1, 'Ogunniyi', 'Isokan', 'isokandone@gmail.com', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 'upload/IMG_0034.JPG', '9084921182', '13 March 2019 12:06:33', '13 March 2019 12:06:33');
+(1, 'Paul', 'Paul', 'p@p.com', 'a027184a55211cd23e3f3094f1fdc728df5e0500', 'upload/IMG_0034.JPG', '1234567890', '13 March 2019 12:36:10', '13 March 2019 12:36:10');
 
 --
 -- Indexes for dumped tables
