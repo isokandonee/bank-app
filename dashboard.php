@@ -1,14 +1,19 @@
 <?php 
 session_start();
 require "connect.php"; 
-$em = $_SESSION['email'];
-$fetch = mysqli_query($conn,"SELECT first_name,balance,account_number from user_tb left OUTER join user_account ON (user_tb.id = user_account.user_id)");
+$ln = $_SESSION['lname'];
+// $l = $_SESSION['lname'];
+$fetch = mysqli_query($conn,"SELECT first_name,last_name,balance,account_number from user_tb left OUTER join user_account ON 
+(user_tb.id = user_account.user_id) having last_name like '$ln'");
 // $id = $_SESSION['id'];
 // $fetcha = mysqli_query($conn,"SELECT account_no from user_account where id = '$id'");
 // $a = mysqli_fetch_array($fetcha);
 // $acc = $a['account_no'];
 // $fetcht = mysqli_query($conn,"SELECT credit,debit from transaction where account_no = '$acc'");
 $r = mysqli_fetch_array($fetch);
+$f = $r['first_name'];
+$l = $r['last_name'];
+$fl = $f." ".$l; 
 // $t['credit'];
 // $ac = ;
 
@@ -93,7 +98,7 @@ $r = mysqli_fetch_array($fetch);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><?php echo "<tr> <td>".$r['first_name']."</td></tr>"; ?></a>
+                    <a class="navbar-brand" href="#"><?php echo "<tr> <td>".$fl."</td></tr>"; ?></a>
                 </div>
         <div class="collapse navbar-collapse">
             
@@ -133,37 +138,25 @@ $r = mysqli_fetch_array($fetch);
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card">
 
                             <div class="header">
-                                <h4 class="title">Email Statistics</h4>
-                                <p class="category">Last Campaign Performance</p>
-                            </div>
+                                <h4 class="title">Account No</h4>
+                                <!-- <p class="category">Last Performance</p> -->
+                            </div><hr>
                             <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Bounce
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-                                    </div>
-                                </div>
+                                <!-- <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div> -->
+                                <b style="font-size:3.5em;"><?php echo "<tr> <td>".$r['account_number']."</td></tr>"; ?></b>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Account Balance</h4>
                                 <!-- <i class="divider"></i> -->
-                                <p class="simple-text text-success" style="font-size:1em;"> <?php echo "<tr> <td>".$r['account_number']."</td></tr>"; ?></p>
                             </div><hr>
                             <div class="content">
                                 <div class="simple-text text-success">

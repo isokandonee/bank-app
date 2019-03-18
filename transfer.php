@@ -1,8 +1,13 @@
 <?php 
 session_start();
-$id = $_SESSION['unames'];
-require "connect.php"; 
-$fetch = mysqli_query($conn,"SELECT name from user_registration where username = '$id'");
+require "connect.php"; $ln = $_SESSION['lname'];
+// $l = $_SESSION['lname'];
+$fetch = mysqli_query($conn,"SELECT first_name,last_name,balance,account_number from user_tb left OUTER join user_account ON 
+(user_tb.id = user_account.user_id) having last_name like '$ln'");
+$r = mysqli_fetch_array($fetch);
+$f = $r['first_name'];
+$l = $r['last_name'];
+$fl = $f." ".$l; 
 ?>
 <!doctype html>
 <html lang="en">
@@ -77,7 +82,7 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration where username =
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><table><?php while($r = mysqli_fetch_array($fetch)){ echo "<tr> <td>".$r['name']."</td> </tr>";} ?></table></a>
+                    <a class="navbar-brand" href="#"><?php echo "<tr> <td>".$fl."</td></tr>"; ?></a>
                 </div>
         <div class="collapse navbar-collapse">
             
@@ -117,15 +122,15 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration where username =
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Edit Profile</h4>
+                                <h4 class="title">Transfer</h4>
                             </div>
                             <div class="content">
                                 <form action="transferc.php" method="POST" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>Account No</label>
                                                 <input type="text" class="form-control" name="ac_no" placeholder="Account number">
@@ -142,7 +147,7 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration where username =
                                     </div> -->
                                     
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>Amount</label>
                                                 <input type="text" class="form-control" name="amount" placeholder="Amount">

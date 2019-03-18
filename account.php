@@ -1,7 +1,12 @@
 <?php 
 session_start();
 require "connect.php"; 
-$fetch = mysqli_query($conn,"SELECT name from user_registration");
+$ln = $_SESSION['lname'];
+$fetch = mysqli_query($conn,"SELECT first_name,last_name from user_tb where last_name like '$ln'");
+$r = mysqli_fetch_array($fetch);
+$f = $r['first_name'];
+$l = $r['last_name'];
+$fl = $f." ".$l;
 ?>
 <!doctype html>
 <html lang="en">
@@ -76,7 +81,7 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><table><?php while($r = mysqli_fetch_array($fetch)){ echo "<tr> <td>".$r['name']."</td> </tr>";} ?></table></a>
+                    <a class="navbar-brand" href="#"><?php echo "<tr> <td>".$fl."</td></tr>"; ?></a>
                 </div>
         <div class="collapse navbar-collapse">
             
@@ -116,10 +121,10 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Edit Profile</h4>
+                                <h4 class="title">Create account</h4>
                             </div>
                             <div class="content">
                                     <form enctype="multipart/form-data" action="accountc.php" method="POST">
@@ -130,26 +135,33 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
                                                     <input type="text" class="form-control" placeholder="Username" name="username">
                                                 </div>
                                             </div> -->
-                                            <div class="col-md-8 pl-1">
+                                            <div class="col-md-10 pl-1">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Amount to deposit</label>
-                                                    <input type="text" class="form-control" name="amount" placeholder="Amount">
+                                                    <label>Account type </label>
+                                                    <!-- <input type="select" name="savings"> -->
+                                                    <select name="ac_type" required class="form-control" id="accnt">
+                                                        <!-- <option class="form-control-option" value="0">Select account type</option> -->
+                                                        <option class="form-control-option" value="1">Savings</option>
+                                                        <option class="form-control-option" value="2">Current</option>
+                                                        <option class="form-control-option" value="3">Domicilary</option>                                                    
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 pr-1">
+                                            <div class="col-md-10 pr-1">
+                                                
                                                 <div class="form-group">
-                                                    <label>Savings</label>
-                                                    <input type="checkbox" checked class="form-control" name="savings">
+                                                    <label for="exampleInputEmail1">Amount to deposit</label>
+                                                    <input type="text" class="form-control" name="amount" required placeholder="Amount">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 pl-1">
+                                            <!-- <div class="col-md-6 pl-1">
                                                 <div class="form-group">
                                                     <label>Current</label>
-                                                    <input type="checkbox" checked class="form-control" name="current">
+                                                    <input type="checkbox" class="form-control" name="current">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <button type="submit" class="btn btn-info btn-fill pull-right">Create</button>
                                         <div class="clearfix"></div>
@@ -211,5 +223,5 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
-
+<!-- <script>function alert(){ var acn = document.getElementById('accnt');   console.log(acn.value)}</script> -->
 </html>

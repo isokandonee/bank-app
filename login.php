@@ -10,7 +10,7 @@ $save = mysqli_query($conn,"select * from user_tb where email ='$em' and passwor
 while ($r = mysqli_fetch_array($save)) {
     $log = false;
     $_SESSION['email'] = $r['email'];
-    $_SESSION['unames'] = $r['username'];
+    $_SESSION['lname'] = $r['last_name'];
     $_SESSION['pass'] = $r['password'];
     $_SESSION['id'] = $r['id'];
     $_SESSION['passw'] = $pa;

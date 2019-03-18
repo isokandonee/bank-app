@@ -1,11 +1,12 @@
 <?php 
-include 'layout.php'; 
+// include 'layout.php'; 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="assets/img/obs.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Log in</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="indexer.css">
@@ -54,7 +55,7 @@ include 'layout.php';
                 <input type="password" required  class="form-control" id="pwd" name="password">
             </div>
                 <button type="submit" class="btn btn-primary">Log in</button>
-                <p>Not yet registered? <a href="sign_up.php">Sign up</a></p>
+                <p>Not yet registered? <a href="index.php">Sign up</a></p>
                 
         </form>
     </div>
