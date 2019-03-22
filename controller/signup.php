@@ -40,9 +40,9 @@ $insert = mysqli_query($conn,
 // echo mysqli_error($conn);
 // echo "$fn $ln $ph $pa1 $pa2 $em $crdt $updt";
         if($insert){
-            echo "<script>alert('Registration successful!')</script>";header('location:/login.php');
+            echo "<script>alert('Registration successful!')</script>";header('location:../login.php');
         }
-        else{header('location:./index.php');echo "<script>alert('Registration not successful!')</script>";}
+        else{header('location:../index.php');echo "<script>alert('Registration not successful!')</script>";}
 }
 
 
