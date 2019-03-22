@@ -1,5 +1,5 @@
 <?php 
-include 'layout.php'; 
+// include 'controller/layout.php'; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,9 +10,13 @@ include 'layout.php';
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Sign up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
+<link href="assets/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.min.js"></script>
 	<style>
 		body{
-			background-color: lightgrey;
+			background-color: powderblue;
 		}
 		form{
 			position: relative;
@@ -31,7 +35,7 @@ include 'layout.php';
 <body>
 <p>
 	<?php
-	require "connect.php";
+	require "controller/connect.php";
 		if(isset($msgs)){
 			echo "<h2  class='text-danger' style='text-align:center'>".$msgs."</h2>";
 		}
@@ -44,7 +48,7 @@ include 'layout.php';
             }
 	?></p>
 <div class="container">
-			<form class="col-md-6 mx-auto shadow pt-2 pd-4" action="signup.php" method="POST" enctype="multipart/form-data">
+			<form class="col-md-6 mx-auto shadow pt-2 pd-4" action="controller/signup.php" method="POST" enctype="multipart/form-data">
 				<h2 style="text-align:center;">User Registration</h2>
 					<div class="form-group">
 						<label for="pwd">First Name:</label>
@@ -76,7 +80,7 @@ include 'layout.php';
 					<input required class="form-control-file" type="file" name="fileToUpload">
 				</div>
 					<button type="submit" class="btn btn-primary px-5">Sign up</button>
-					<p>Signed up already? <a href="log_in.php">Log in</a></p>
+					<p>Signed up already? <a href="login.php">Log in</a></p>
 			</form>
 	</div>
 

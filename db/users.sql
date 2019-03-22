@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2019 at 11:41 AM
+-- Generation Time: Mar 19, 2019 at 04:14 AM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -77,13 +77,6 @@ CREATE TABLE `transaction` (
   `created_at` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `transaction`
---
-
-INSERT INTO `transaction` (`id`, `transaction_type_id`, `source_id`, `destination_id`, `amount`, `created_at`) VALUES
-(1, 2, 1, 1, 20000000, '17 March 2019 10:11:36');
-
 -- --------------------------------------------------------
 
 --
@@ -120,13 +113,6 @@ CREATE TABLE `user_account` (
   `updated_at` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `user_account`
---
-
-INSERT INTO `user_account` (`id`, `user_id`, `account_type_id`, `account_number`, `balance`, `status_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 38976440, 20000000, 1, '17 March 2019 10:11:36', '17 March 2019 10:11:36');
-
 -- --------------------------------------------------------
 
 --
@@ -140,17 +126,10 @@ CREATE TABLE `user_tb` (
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `passport` varchar(20) NOT NULL,
-  `phone` varchar(20) NOT NULL,
+  `phone` int(20) NOT NULL,
   `created_at` varchar(50) NOT NULL,
   `updated_at` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_tb`
---
-
-INSERT INTO `user_tb` (`id`, `first_name`, `last_name`, `email`, `password`, `passport`, `phone`, `created_at`, `updated_at`) VALUES
-(1, 'Paul', 'Paul', 'p@p.com', 'a027184a55211cd23e3f3094f1fdc728df5e0500', 'upload/IMG_0034.JPG', '1234567890', '13 March 2019 12:36:10', '13 March 2019 12:36:10');
 
 --
 -- Indexes for dumped tables
@@ -225,7 +204,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `transaction_type`
 --
@@ -235,12 +214,12 @@ ALTER TABLE `transaction_type`
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user_tb`
 --
 ALTER TABLE `user_tb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require "connect.php"; 
+require "../controller/connect.php"; 
 $fetch = mysqli_query($conn,"SELECT name from user_registration");
 ?>
 <!doctype html>
@@ -17,23 +17,19 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="../assets/css/animate.min.css" rel="stylesheet"/>
 
     <!--  Light Bootstrap Table core CSS    -->
-    <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
-
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="../assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
 
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -52,15 +48,33 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
 
             <ul class="nav">
                 <li>
-                    <a href="dashboard.php">
+                    <a href="../pages/dashboard.php">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="transfer.php">
+                    <a href="../pages/transfer.php">
                         <i class="pe-7s-graph"></i>
                         <p>Transfer</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/account.php">
+                        <i class="pe-7s-user"></i>
+                        <p>Account</p>
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="../pages/user.php">
+                        <i class="pe-7s-user"></i>
+                        <p>User</p>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="../controller/logout.php">
+                        <i class="pe-7s-logout"></i>
+                        <p>Logout</p>
                     </a>
                 </li>
             </ul>
@@ -101,10 +115,10 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
 
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="user.php">User Profile</a></li>
-                                <li><a href="account.php">Create Account</a></li>
+                                <li><a href="../pages/user.php">User Profile</a></li>
+                                <li><a href="../pages/account.php">Create Account</a></li>
                                 <!-- <li><a href="#">Create current account</a></li> -->
-                                <li><a href="logout.php">Log out</a></li>
+                                <li><a href="../controller/logout.php">Log out</a></li>
                               </ul>
                         </li>
 						<li class="separator hidden-lg hidden-md"></li>
@@ -122,7 +136,7 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
                                 <h4 class="title">Edit Profile</h4>
                             </div>
                             <div class="content">
-                                <form action="update.php">
+                                <form action="../controller/pUpdate.php">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -201,7 +215,7 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
                             <div class="content">
                                 <div class="author">
                                      <a href="#">
-                                    <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="..."/>
+                                    <img class="avatar border-gray" src="../assets/img/faces/face-3.jpg" alt="..."/>
 
                                       <h4 class="title">Mike Andrew<br />
                                          <small>michael24</small>
@@ -257,22 +271,7 @@ $fetch = mysqli_query($conn,"SELECT name from user_registration");
 </body>
 
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
 
 </html>
