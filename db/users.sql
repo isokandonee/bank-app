@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2019 at 04:14 AM
+-- Generation Time: Mar 22, 2019 at 08:52 PM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -74,8 +74,15 @@ CREATE TABLE `transaction` (
   `source_id` int(20) NOT NULL,
   `destination_id` int(20) NOT NULL,
   `amount` int(20) NOT NULL,
-  `created_at` varchar(50) NOT NULL
+  `created_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`id`, `transaction_type_id`, `source_id`, `destination_id`, `amount`, `created_at`) VALUES
+(1, 2, 1, 1, 20000000, '2019-03-22');
 
 -- --------------------------------------------------------
 
@@ -103,15 +110,21 @@ INSERT INTO `transaction_type` (`id`, `transaction_type`) VALUES
 --
 
 CREATE TABLE `user_account` (
-  `id` int(20) NOT NULL,
+  `account_number` int(50) NOT NULL,
   `user_id` int(20) NOT NULL,
   `account_type_id` int(20) NOT NULL,
-  `account_number` int(20) NOT NULL,
   `balance` int(20) NOT NULL,
   `status_id` int(20) NOT NULL,
-  `created_at` varchar(50) NOT NULL,
-  `updated_at` varchar(50) NOT NULL
+  `created_at` date NOT NULL,
+  `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_account`
+--
+
+INSERT INTO `user_account` (`account_number`, `user_id`, `account_type_id`, `balance`, `status_id`, `created_at`, `updated_at`) VALUES
+(220199, 1, 1, 20000000, 1, '2019-03-22', NULL);
 
 -- --------------------------------------------------------
 
@@ -125,11 +138,18 @@ CREATE TABLE `user_tb` (
   `last_name` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `passport` varchar(20) NOT NULL,
-  `phone` int(20) NOT NULL,
-  `created_at` varchar(50) NOT NULL,
-  `updated_at` varchar(50) NOT NULL
+  `passport` varchar(50) NOT NULL,
+  `phone` int(50) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_tb`
+--
+
+INSERT INTO `user_tb` (`id`, `first_name`, `last_name`, `email`, `password`, `passport`, `phone`, `created_at`, `updated_at`) VALUES
+(1, 'Alao', 'Akala', 'alao@gmail.com', '1fa23adf6c8694e33b6a67a75ae5618be6952162', 'upload/IMG_0050.JPG', 11111111, '2019-03-21', NULL);
 
 --
 -- Indexes for dumped tables
@@ -170,10 +190,7 @@ ALTER TABLE `transaction_type`
 -- Indexes for table `user_account`
 --
 ALTER TABLE `user_account`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `account_number` (`account_number`),
-  ADD KEY `id` (`id`),
-  ADD KEY `id_2` (`id`),
+  ADD PRIMARY KEY (`account_number`),
   ADD KEY `account_type_id` (`account_type_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `status_id` (`status_id`);
@@ -204,7 +221,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `transaction_type`
 --
@@ -214,12 +231,12 @@ ALTER TABLE `transaction_type`
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `account_number` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220200;
 --
 -- AUTO_INCREMENT for table `user_tb`
 --
 ALTER TABLE `user_tb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
