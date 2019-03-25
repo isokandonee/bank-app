@@ -18,12 +18,12 @@ $fl = $f." ".$l;
 // $ac = ;
 
 $fetcht = mysqli_query($conn,"SELECT * FROM transaction where source_id = $id");
-$t = mysqli_fetch_array($fetcht);
-$c = $t['created_at'];
-$d = $t['amount'];
-$cr_de = $t['transaction_type_id'];
-$cre = 0;
-if($cr_de == 1){$cre="Debit";}else{$cre="Credit";}
+// $t = mysqli_fetch_array($fetcht);
+// $c = $t['created_at'];
+// $d = $t['amount'];
+// $cr_de = $t['transaction_type_id'];
+// $cre = 0;
+// if($cr_de == 1){$cre="Debit";}else{$cre="Credit";}
 ?>
 <!doctype html>
 <html lang="en">
@@ -167,8 +167,8 @@ if($cr_de == 1){$cre="Debit";}else{$cre="Credit";}
                             </div><hr>
                             <div class="content"><p class="text-info">
                                 <!-- <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div> -->
-                                <?php echo "<table class='text-info' style='font-size:3em'><tr><th style='border:5px dashed powderblue'>Date</th><th style='border:5px dashed powderblue'>Type</th><th style='border:5px dashed powderblue'>Amount</th></tr>"; ?>
-                                <?php echo "<tr> <td style='border:4px dashed powderblue'>".$c."</td><td style='border:4px dashed powderblue'>".$cre."</td><td style='border:4px dashed powderblue'>".$d."</td></tr></table>"; ?></p>
+                                <?php while($t = mysqli_fetch_array($fetcht)){ echo "<table class='text-info' style='font-size:3em'><tr><th style='border:5px dashed powderblue'>Date</th><th style='border:5px dashed powderblue'>Type</th><th style='border:5px dashed powderblue'>Amount</th></tr>";
+                                    echo "<tr> <td style='border:4px dashed powderblue'>".$t['created_at']."</td><td style='border:4px dashed powderblue'>".$t['transaction_type_id']."</td><td style='border:4px dashed powderblue'>".$t['amount']."</td></tr></table>";} ?></p>
                             </div>
                             <!-- <button class="btn btn-fill btn-primary px-5">Print Account Statement</button> -->
                         </div>
