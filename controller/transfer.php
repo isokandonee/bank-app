@@ -15,12 +15,13 @@ $b = mysqli_fetch_array($fetcher);
 $balance = $b['balance'];
 $bal = $balance - $am;
 $bala = $balances + $am;
-$src = "source_id";
-$dst = "destination_id";
-$insert = mysqli_query($conn,"insert into transaction (transaction_type_id,$src,$dst,amount,created_at)
- values('$ttide','$id','$ide','$am',current_date()");
- $inserts = mysqli_query($conn,"insert into transaction (transaction_type_id,$src,$dst,amount,created_at)
-  values('$ttid','$ide','$id','$am',current_date()");
+// $src = "source_id";
+// $dst = "destination_id";
+// echo "ttide ".$ttide." id ".$id." ide ".$ide." am ".$am;
+$insert = mysqli_query($conn,"insert into transaction (transaction_type_id,source_id,destination_id,amount,created_at)
+ values('$ttide','$id','$ide','$am',current_date())");
+ $inserts = mysqli_query($conn,"insert into transaction (transaction_type_id,source_id,destination_id,amount,created_at)
+  values('$ttid','$ide','$id','$am',current_date())");
  $update = mysqli_query($conn,"update user_account set balance = $bal where user_id = $id");
  $updates = mysqli_query($conn,"update user_account set balance = $bala where user_id = $ide");
  if (!($insert) && !($inserts)) {
@@ -47,9 +48,3 @@ else {
 
 
 ?>
-<script>
-    var e = document.getElementById("but");
-    if($src == $dst){
-        e.preventDefault();
-    }
-</script>
