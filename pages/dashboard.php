@@ -1,10 +1,10 @@
 <?php 
 session_start();
 require "../controller/connect.php"; 
-$ln = $_SESSION['lname'];
+$id = $_SESSION['id'];
 // $l = $_SESSION['lname'];
 $fetch = mysqli_query($conn,"SELECT * from user_tb left OUTER join user_account ON 
-(user_tb.id = user_account.user_id) having last_name like '$ln'");
+(user_tb.id = user_account.user_id) where id = $id");
 // $id = $_SESSION['id'];
 // $fetcha = mysqli_query($conn,"SELECT account_no from user_account where id = '$id'");
 // $a = mysqli_fetch_array($fetcha);
@@ -88,12 +88,12 @@ $fl = $f." ".$l;
                         <p>Account</p>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="../pages/user.php">
+                <li>
+                    <a href="../pages/statement.php">
                         <i class="pe-7s-user"></i>
-                        <p>User</p>
+                        <p>Statement of Account</p>
                     </a>
-                </li> -->
+                </li>
                 <li>
                     <a href="../controller/logout.php">
                         <i class="pe-7s-user"></i>

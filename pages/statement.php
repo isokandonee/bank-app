@@ -3,12 +3,27 @@ session_start();
 require "../controller/connect.php"; 
 $id = $_SESSION['id'];
 // $l = $_SESSION['lname'];
-$fetch = mysqli_query($conn,"SELECT first_name,last_name,balance,account_number from user_tb left OUTER join user_account ON 
-(user_tb.id = user_account.user_id) where id = $id");
+$fetch = mysqli_query($conn,"SELECT * from user_tb left OUTER join user_account ON 
+(user_tb.id = user_account.user_id) where id = '$id'");
+// $id = $_SESSION['id'];
+// $fetcha = mysqli_query($conn,"SELECT account_no from user_account where id = '$id'");
+// $a = mysqli_fetch_array($fetcha);
+// $acc = $a['account_no'];
+// $fetcht = mysqli_query($conn,"SELECT credit,debit from transaction where account_no = '$acc'");
 $r = mysqli_fetch_array($fetch);
 $f = $r['first_name'];
 $l = $r['last_name'];
 $fl = $f." ".$l; 
+// $t['credit'];
+// $ac = ;
+
+$fetcht = mysqli_query($conn,"SELECT * FROM transaction where source_id = $id");
+$t = mysqli_fetch_array($fetcht);
+$c = $t['created_at'];
+$d = $t['amount'];
+$cr_de = $t['transaction_type_id'];
+$cre = 0;
+if($cr_de == 1){$cre="Debit";}else{$cre="Credit";}
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,7 +32,7 @@ $fl = $f." ".$l;
 	<link rel="icon" type="image/png" href="../assets/img/obs.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Bank App</title>
+	<title>Light Bootstrap Dashboard by Creative Tim</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -37,24 +52,29 @@ $fl = $f." ".$l;
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
 </head>
 <body>
 
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-5.jpg">
 
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    <!--
 
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text" style="color:orange;font-size:2em;">
+                <a href="#" class="simple-text text-warning" style="font-size:2em;">
                     Bank App
                 </a>
             </div>
 
             <ul class="nav">
-                <li>
+                <li class="active">
                     <a href="../pages/dashboard.php">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
@@ -66,6 +86,7 @@ $fl = $f." ".$l;
                         <p>Transfer</p>
                     </a>
                 </li>
+
                 <li>
                     <a href="../pages/account.php">
                         <i class="pe-7s-user"></i>
@@ -122,7 +143,7 @@ $fl = $f." ".$l;
 
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="../pages/user.php">Transfer</a></li>
+                                <li><a href="../pages/user.php">User Profile</a></li>
                                 <li><a href="../pages/account.php">Create Account</a></li>
                                 <!-- <li><a href="#">Create current account</a></li> -->
                                 <li><a href="../controller/logout.php">Log out</a></li>
@@ -137,60 +158,26 @@ $fl = $f." ".$l;
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="card">
-                            <div class="header">
-                                <h4 class="title">Transfer</h4>
-                            </div>
-                            <div class="content">
-                                <form action="../controller/transfer.php" method="POST" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label>Account No</label>
-                                                <input type="text" class="form-control" name="ac_no" placeholder="Account number">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Name</label></textarea>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label>Amount</label>
-                                                <input type="text" class="form-control" name="amount" placeholder="Amount">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" name="pass" placeholder="Password">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    
-                            </div>
 
-                                    <button type="submit" id="but" class="btn btn-info btn-fill pull-right">Send</button>
-                                    <div class="clearfix"></div>
-                                </form>
+                            <div class="header">
+                                <h4 class="title">Account Statement</h4>
+                                <!-- <p class="category">Last Performance</p> -->
+                            </div><hr>
+                            <div class="content"><p class="text-info">
+                                <!-- <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div> -->
+                                <?php echo "<table class='text-info' style='font-size:3em'><tr><th style='border:5px dashed powderblue'>Date</th><th style='border:5px dashed powderblue'>Type</th><th style='border:5px dashed powderblue'>Amount</th></tr>"; ?>
+                                <?php echo "<tr> <td style='border:4px dashed powderblue'>".$c."</td><td style='border:4px dashed powderblue'>".$cre."</td><td style='border:4px dashed powderblue'>".$d."</td></tr></table>"; ?></p>
                             </div>
+                            <!-- <button class="btn btn-fill btn-primary px-5">Print Account Statement</button> -->
                         </div>
                     </div>
-
-                    
-
                 </div>
+
+
+
+                
             </div>
         </div>
 
@@ -201,18 +188,28 @@ $fl = $f." ".$l;
                     <ul>
                         <li>
                             <a href="#">
-                                Contact us
+                                Home
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                About us
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               Blog
                             </a>
                         </li>
                     </ul>
                 </nav>
                 <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Mitchel</a>, all rights reserved.  
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Mitchel</a>, all rights reserved
                 </p>
             </div>
         </footer>
@@ -226,5 +223,7 @@ $fl = $f." ".$l;
     <!--   Core JS Files   -->
     <script src="../assets/js/jquery.min.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+
 
 </html>

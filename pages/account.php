@@ -1,8 +1,8 @@
 <?php 
 session_start();
 require "../controller/connect.php"; 
-$ln = $_SESSION['lname'];
-$fetch = mysqli_query($conn,"SELECT first_name,last_name from user_tb where last_name like '$ln'");
+$id = $_SESSION['id'];
+$fetch = mysqli_query($conn,"SELECT first_name,last_name from user_tb where id like '$id'");
 $r = mysqli_fetch_array($fetch);
 $f = $r['first_name'];
 $l = $r['last_name'];
@@ -70,12 +70,12 @@ $fl = $f." ".$l;
                         <p>Account</p>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="../pages/user.php">
+                <li>
+                <a href="../pages/statement.php">
                         <i class="pe-7s-user"></i>
-                        <p>User</p>
+                        <p>Statement of Account</p>
                     </a>
-                </li> -->
+                </li>
                 <li>
                     <a href="../controller/logout.php">
                         <i class="pe-7s-user"></i>

@@ -77,7 +77,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pht">Upload Photo:</label>
-					<input required class="form-control-file" type="file" name="fileToUpload">
+					<input required class="form-control" type="file" name="fileToUpload">
 				</div>
 					<button type="submit" class="btn btn-primary px-5">Sign up</button>
 					<p>Signed up already? <a href="login.php">Log in</a></p>

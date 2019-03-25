@@ -9,7 +9,7 @@ require "connect.php";
     $pa2 = sha1($_POST['passw']);
     $em = $_POST['email'];
     $updt = date('j F Y h:i:s');
-    $target_dir = "upload/";
+    $target_dir = "../upload/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     $log = true;

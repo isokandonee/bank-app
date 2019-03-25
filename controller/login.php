@@ -12,6 +12,7 @@ while ($r = mysqli_fetch_array($save)) {
     $_SESSION['pass'] = $r['password'];
     $_SESSION['id'] = $r['id'];
     $_SESSION['passw'] = $pa;
+    $_SESSION['Email'] = $em;
 }
 if ($log) {
     $msg = 'Login failed! Invalid email or password';
