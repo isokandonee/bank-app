@@ -152,7 +152,7 @@ $fl = $f." ".$l;
                     <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Transfer</h4>
+                                <h4 class="title">Withdraw</h4>
                             </div>
                             <span><?php
         if (isset($msg)) {
@@ -161,12 +161,12 @@ $fl = $f." ".$l;
             }
         ?></span>
                             <div class="content">
-                                <form action="../controller/transfer.php" method="POST" enctype="multipart/form-data">
+                                <form action="../controller/withdraw.php" method="POST" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="form-group">
-                                                <label>Account No</label>
-                                                <input type="text" class="form-control" name="ac_no" placeholder="Account number">
+                                                <label>Amount</label>
+                                                <input type="text" class="form-control" name="amount" placeholder="Amount">
                                             </div>
                                         </div>
                                     </div>
@@ -182,8 +182,8 @@ $fl = $f." ".$l;
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="form-group">
-                                                <label>Amount</label>
-                                                <input type="text" class="form-control" name="amount" placeholder="Amount">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name="pass" placeholder="********">
                                             </div>
                                         </div>
                                     </div>
@@ -199,7 +199,7 @@ $fl = $f." ".$l;
                                     
                             <!-- </div> -->
 
-                                    <button type="submit" id="but" class="btn btn-info btn-fill pull-right">Send</button>
+                                    <button type="submit" id="but" class="btn btn-info btn-fill pull-right">Withdraw</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>

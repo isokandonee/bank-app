@@ -1,8 +1,9 @@
 <?php
 session_start();
 require "connect.php";
+if(isset($_POST['pass'])){
 $id = $_SESSION['id'];
-$ac = $_POST['ac_no'];
+$ac = sha1($_POST['pass']);
 $am = $_POST['amount'];
 $ttid = 1;
 $ttide = 2;
@@ -45,7 +46,7 @@ else {
         echo "<script>alert('Transfer successful!')</script>";
     
   
+    }
+
 }
-
-
 ?>

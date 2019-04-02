@@ -77,6 +77,18 @@ $fl = $f." ".$l;
                     </a>
                 </li>
                 <li>
+                    <a href="../pages/deposit.php">
+                        <i class="pe-7s-user"></i>
+                        <p>Deposit</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/withdraw.php">
+                        <i class="pe-7s-user"></i>
+                        <p>Withdraw</p>
+                    </a>
+                </li>
+                <li>
                     <a href="../controller/logout.php">
                         <i class="pe-7s-user"></i>
                         <p>Logout</p>

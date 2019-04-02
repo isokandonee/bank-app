@@ -1,68 +1,54 @@
 <?php 
-// include 'controller/layout.php'; 
+include 'includes/a_config.php'; 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="assets/img/obs.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Log in</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/indexer.css">
-    <script src="assets/js/main.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-	<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
-<link href="assets/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.min.js"></script>
-    
-<style>
-        body{
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            color: white;
-            font-size:1.2em;
-            background-color: powderblue;
-        }
-        .container{
-            position: relative;
-            top: 200px;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        #signup{
-            position: relative;
-            left: 80px;
-            bottom: 38px;
-        }
-    </style>
+<?php include "includes/head-tag-contents.php"; ?>
 </head>
 <body>
-    <div class="container" style="margin-top:-100px">
-        <?php
+<?php include "includes/design-top.php"; ?>
+        <div class="container" id="main-container">
+        <section class="testimonial py-5" id="testimonial">
+            <div class="container">
+                
+            <div class="row ">
+                <div class="col-md-4 py-5 bg-primary text-white text-center ">
+                    <div class=" ">
+                        <div class="card-body">
+                            <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
+                            <h2 class="py-3">Login</h2>
+                            <p>Please click the below button if you do not have an account yet.</p>
+                            <a class="btn btn-success" href="index.php">Signup</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 py-5 border"><?php include 'controller/login.php';
         if (isset($msg)) {
                 # code...
                 echo "<p class='text-warning' style='text-align:center'>$msg</p>";
             }
         ?>
-        <form class="col-md-6 mx-auto shadow pt-4 pd-4" action="controller/login.php" method="POST">
-            <div class="form-group">
-                <label for="usr">Email:</label>
-                <input type="text" required  class="form-control" id="usr" name="email">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" required  class="form-control" id="pwd" name="password">
-            </div>
-                <button type="submit" class="btn btn-primary">Log in</button>
-                <p>Not yet registered? <a href="index.php">Sign up</a></p>
+                    <h4 class="pb-4 text-center">Login here</h4>
+                <form class="" action="controller/login.php" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input required placeholder="you@domain.com" type="email" name="email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input required placeholder="********" type="password" name="password" class="form-control">
+                    </div>
+                </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                 
-        </form>
+                </form>
+                </div>
+            </div>
+        </section>
     </div>
-    
-</div>
-
-
-</body>
-</html>
+        <?php include "includes/footer.php";?>
+    </body>
+    <script src="assets/js/index.js"></script>
+    </html>

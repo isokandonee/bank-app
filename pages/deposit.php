@@ -2,13 +2,11 @@
 session_start();
 require "../controller/connect.php"; 
 $id = $_SESSION['id'];
-// $l = $_SESSION['lname'];
-$fetch = mysqli_query($conn,"SELECT first_name,last_name,balance,account_number from user_tb left OUTER join user_account ON 
-(user_tb.id = user_account.user_id) where id = $id");
+$fetch = mysqli_query($conn,"SELECT first_name,last_name from user_tb where id like '$id'");
 $r = mysqli_fetch_array($fetch);
 $f = $r['first_name'];
 $l = $r['last_name'];
-$fl = $f." ".$l; 
+$fl = $f." ".$l;
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,7 +15,7 @@ $fl = $f." ".$l;
 	<link rel="icon" type="image/png" href="../assets/img/obs.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Bank App</title>
+	<title>Light Bootstrap Dashboard by Creative Tim</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -79,7 +77,7 @@ $fl = $f." ".$l;
                     </a>
                 </li>
                 <li>
-                    <a href="../pages/deposit.php">
+                    <a href="../controller/deposit.php">
                         <i class="pe-7s-user"></i>
                         <p>Deposit</p>
                     </a>
@@ -134,7 +132,7 @@ $fl = $f." ".$l;
 
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="../pages/user.php">Transfer</a></li>
+                                <li><a href="../pages/user.php">User Profile</a></li>
                                 <li><a href="../pages/account.php">Create Account</a></li>
                                 <!-- <li><a href="#">Create current account</a></li> -->
                                 <li><a href="../controller/logout.php">Log out</a></li>
@@ -152,56 +150,47 @@ $fl = $f." ".$l;
                     <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Transfer</h4>
+                                <h4 class="title text-center">Deposit</h4>
                             </div>
-                            <span><?php
-        if (isset($msg)) {
-                # code...
-                echo "<p class='text-warning' style='text-align:center'>$msg</p>";
-            }
-        ?></span>
                             <div class="content">
-                                <form action="../controller/transfer.php" method="POST" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label>Account No</label>
-                                                <input type="text" class="form-control" name="ac_no" placeholder="Account number">
+                                    <form enctype="multipart/form-data" action="../controller/deposit.php" method="POST">
+                                        <div class="row">
+                                            <!-- <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control" placeholder="Username" name="username">
+                                                </div>
+                                            </div> -->
+                                            <div class="col-md-10 pr-1">
+                                                <div class="form-group">
+                                                    <label>Account Number </label>
+                                                    <input class="form-control" type="text" name="ac_no" required placeholder="Account number">
+                                                    <!-- <select name="ac_type" required id="accnt">
+                                                        <option class="form-control-option" value="1">Savings</option>
+                                                        <option class="form-control-option" value="2">Current</option>
+                                                        <option class="form-control-option" value="3">Domicilary</option>                                                    
+                                                    </select> -->
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <!-- <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Name</label></textarea>
+                                        <div class="row">
+                                            <div class="col-md-10 pr-1">
+                                                
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Amount to deposit</label>
+                                                    <input type="text" class="form-control" name="amount" required placeholder="Amount">
+                                                </div>
                                             </div>
+                                            <!-- <div class="col-md-6 pl-1">
+                                                <div class="form-group">
+                                                    <label>Current</label>
+                                                    <input type="checkbox" class="form-control" name="current">
+                                                </div>
+                                            </div> -->
                                         </div>
-                                    </div> -->
-                                    
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label>Amount</label>
-                                                <input type="text" class="form-control" name="amount" placeholder="Amount">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" name="pass" placeholder="Password">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    
-                            <!-- </div> -->
-
-                                    <button type="submit" id="but" class="btn btn-info btn-fill pull-right">Send</button>
-                                    <div class="clearfix"></div>
-                                </form>
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Deposit</button>
+                                        <div class="clearfix"></div>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -244,5 +233,4 @@ $fl = $f." ".$l;
     <!--   Core JS Files   -->
     <script src="../assets/js/jquery.min.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-
 </html>

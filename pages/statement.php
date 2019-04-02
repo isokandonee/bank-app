@@ -2,28 +2,13 @@
 session_start();
 require "../controller/connect.php"; 
 $id = $_SESSION['id'];
-// $l = $_SESSION['lname'];
 $fetch = mysqli_query($conn,"SELECT * from user_tb left OUTER join user_account ON 
 (user_tb.id = user_account.user_id) where id = '$id'");
-// $id = $_SESSION['id'];
-// $fetcha = mysqli_query($conn,"SELECT account_no from user_account where id = '$id'");
-// $a = mysqli_fetch_array($fetcha);
-// $acc = $a['account_no'];
-// $fetcht = mysqli_query($conn,"SELECT credit,debit from transaction where account_no = '$acc'");
 $r = mysqli_fetch_array($fetch);
 $f = $r['first_name'];
 $l = $r['last_name'];
 $fl = $f." ".$l; 
-// $t['credit'];
-// $ac = ;
-
-$fetcht = mysqli_query($conn,"SELECT * FROM transaction where source_id = $id");
-// $t = mysqli_fetch_array($fetcht);
-// $c = $t['created_at'];
-// $d = $t['amount'];
-// $cr_de = $t['transaction_type_id'];
-// $cre = 0;
-// if($cr_de == 1){$cre="Debit";}else{$cre="Credit";}
+$fetcht = mysqli_query($conn,"SELECT user_tb.id,first_name,last_name,source_id,destination_id,transaction_type_id,transaction.created_at,amount FROM user_tb right outer join transaction using (id) where source_id or destination_id = $id");
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,7 +21,9 @@ $fetcht = mysqli_query($conn,"SELECT * FROM transaction where source_id = $id");
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-
+    <style> body{
+        
+    }</style>
 
     <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -100,6 +87,18 @@ $fetcht = mysqli_query($conn,"SELECT * FROM transaction where source_id = $id");
                     </a>
                 </li>
                 <li>
+                    <a href="../pages/deposit.php">
+                        <i class="pe-7s-user"></i>
+                        <p>Deposit</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/withdraw.php">
+                        <i class="pe-7s-user"></i>
+                        <p>Withdraw</p>
+                    </a>
+                </li>
+                <li>
                     <a href="../controller/logout.php">
                         <i class="pe-7s-user"></i>
                         <p>Logout</p>
@@ -158,17 +157,38 @@ $fetcht = mysqli_query($conn,"SELECT * FROM transaction where source_id = $id");
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-10">
                         <div class="card">
 
                             <div class="header">
                                 <h4 class="title">Account Statement</h4>
                                 <!-- <p class="category">Last Performance</p> -->
                             </div><hr>
-                            <div class="content"><p class="text-info">
+                            <div class="content"><div class="table-responsive-sm"><p class="text-info">
                                 <!-- <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div> -->
-                                <?php while($t = mysqli_fetch_array($fetcht)){ echo "<table class='text-info' style='font-size:3em'><tr><th style='border:5px dashed powderblue'>Date</th><th style='border:5px dashed powderblue'>Type</th><th style='border:5px dashed powderblue'>Amount</th></tr>";
-                                    echo "<tr> <td style='border:4px dashed powderblue'>".$t['created_at']."</td><td style='border:4px dashed powderblue'>".$t['transaction_type_id']."</td><td style='border:4px dashed powderblue'>".$t['amount']."</td></tr></table>";} ?></p>
+                                <?php
+                                    echo "<table class='table text-center table-striped table-bordered text-info'><tr><th>Id</th><th>Date</th><th>Type</th><th>Amount</th>
+                                    <th>Source</th><th>Destination</th></tr>";
+                                    ?>
+                                <?php
+                                    $i=0; while($t = mysqli_fetch_array($fetcht)){
+                                        $i++;
+                                    if($m=$t['source_id']){$fetchm = mysqli_query($conn,"SELECT first_name,last_name from user_tb where id = '$m'");
+                                       $me = mysqli_fetch_array($fetchm);
+                                      $mi =  $me['last_name'];
+                                      $mis =  $me['first_name'];
+                                       $q = $mis." ".$mi;
+                                    }
+                                    if($mm=$t['destination_id']){$fetchm = mysqli_query($conn,"SELECT first_name,last_name from user_tb where id = '$mm'");
+                                        $mee = mysqli_fetch_array($fetchm);
+                                       $mih =  $mee['last_name'];
+                                       $mihs =  $mee['first_name'];
+                                        $qe = $mihs." ".$mih;
+                                     }
+                                    $cr_de = $t['transaction_type_id'];$cre = 0;if($cr_de == 1){$cre="Debit";}else{$cre="Credit";}
+                                    echo "<tr><td>".$i."</td> <td>".$t['created_at']."</td><td>".$cre."</td><td>".$t['amount']."</td><td>".$q."</td><td>".$qe."</td></tr>";} ?>
+                                    <?php echo "</table>" ?>
+                                    </p></div>
                             </div>
                             <!-- <button class="btn btn-fill btn-primary px-5">Print Account Statement</button> -->
                         </div>
